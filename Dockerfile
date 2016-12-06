@@ -22,8 +22,9 @@ RUN cd /usr/share/blog
 # Expose default hugo port
 EXPOSE 1313
 
-ADD ../louis-hugo-blog/ /usr/share/blog
+ADD /var/lib/jenkins/workspace/louis-hugo-blog /usr/share/blog
 
+RUN pwd
 RUN ls -ls 
 
 RUN hugo -t=next -d /usr/share/blog/html
