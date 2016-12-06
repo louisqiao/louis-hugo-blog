@@ -13,6 +13,8 @@ RUN apk add --update wget ca-certificates && \
 
 COPY ./run.sh /run.sh
 
+ADD ../louis-hugo-blog /src
+
 VOLUME /src
 VOLUME /output
 
