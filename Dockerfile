@@ -22,17 +22,13 @@ RUN cd /usr/share/blog
 # Expose default hugo port
 EXPOSE 1313
 
-ADD /var/lib/jenkins/workspace/louis-hugo-blog /usr/share/blog
+# Automatically build site
+ONBUILD ADD ../louis-hugo-blog/ /usr/share/blog
 
 RUN pwd
 RUN ls -ls 
 
-RUN hugo -t=next -d /usr/share/blog/html
-
-
-# Automatically build site
-#ONBUILD ADD ../louis-hugo-blog/ /usr/share/blog
-#ONBUILD RUN hugo -t=next -d /usr/share/blog/html
+ONBUILD RUN hugo -t=next -d /usr/share/blog/html
 
 # By default, serve site
 ENV HUGO_BASE_URL http://localhost:1313
