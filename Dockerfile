@@ -20,8 +20,8 @@ WORKDIR /usr/share/blog
 EXPOSE 1313
 
 # Automatically build site
-ONBUILD ADD /var/lib/jenkins/workspace/louis-hugo-blog/ /usr/share/blog
-ONBUILD RUN hugo -t=next -d /usr/share/nginx/html/
+ONBUILD ADD ../louis-hugo-blog/ /usr/share/blog
+ONBUILD RUN hugo -t=next -d /usr/share/nginx/html/ --config=/usr/share/blog/louis-hugo-blog/config.toml
 
 # By default, serve site
 ENV HUGO_BASE_URL http://localhost:1313
