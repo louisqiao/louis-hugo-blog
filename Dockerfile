@@ -17,14 +17,21 @@ RUN mkdir -p /usr/share/blog /usr/share/blog/html
 WORKDIR /usr/share/blog
 
 RUN cd /usr/share/blog
-RUN ls -ls 
+
 
 # Expose default hugo port
 EXPOSE 1313
 
+ADD ../louis-hugo-blog/ /usr/share/blog
+
+RUN ls -ls 
+
+RUN hugo -t=next -d /usr/share/blog/html
+
+
 # Automatically build site
-ONBUILD ADD ../louis-hugo-blog/ /usr/share/blog
-ONBUILD RUN hugo -t=next -d /usr/share/blog/html
+#ONBUILD ADD ../louis-hugo-blog/ /usr/share/blog
+#ONBUILD RUN hugo -t=next -d /usr/share/blog/html
 
 # By default, serve site
 ENV HUGO_BASE_URL http://localhost:1313
