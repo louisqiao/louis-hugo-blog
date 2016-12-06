@@ -13,7 +13,7 @@ RUN apk add --update wget ca-certificates && \
 
 
 # Create working directory
-RUN mkdir /usr/share/blog
+RUN mkdir -p /usr/share/blog /usr/share/blog/html
 WORKDIR /usr/share/blog
 
 # Expose default hugo port
@@ -21,7 +21,7 @@ EXPOSE 1313
 
 # Automatically build site
 ONBUILD ADD ../louis-hugo-blog/ /usr/share/blog
-ONBUILD RUN hugo -t=next -d /usr/share/nginx/html/ --config=/usr/share/blog/louis-hugo-blog/config.toml
+ONBUILD RUN hugo -t=next -d /usr/share/blog/html --config=/usr/share/blog/config.toml
 
 # By default, serve site
 ENV HUGO_BASE_URL http://localhost:1313
